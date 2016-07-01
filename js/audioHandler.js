@@ -1,5 +1,5 @@
 function call_it(url) {
-	//https://api.soundcloud.com/users/jbcool17/tracks?client_id=a11ba9bdcf2a54bbb2f01da7912a5a23
+	//https://api.soundcloud.com/users/jbcool17/tracks?client_id=CLIENT_ID
 	$.ajax({ url: url,
 			success: function(result){
 				console.log("Calling it");
@@ -9,7 +9,7 @@ function call_it(url) {
 
 
 // SC.initialize({
-//   client_id: 'a11ba9bdcf2a54bbb2f01da7912a5a23'
+//   client_id: 'CLIENT_ID'
 // });
 
 // var track_url = 'http://soundcloud.com/campgroundmusic/camp-ground-line-out';
@@ -18,9 +18,9 @@ function call_it(url) {
 
 //   $('#player').append(oEmbed.html)
 // });
-// USERS - https://api.soundcloud.com/users/jbcool17?client_id=a11ba9bdcf2a54bbb2f01da7912a5a23
+// USERS - https://api.soundcloud.com/users/jbcool17?client_id=CLIENT_ID
 
-var a = $.ajax({url: "https://api.soundcloud.com/tracks/96883354.json?client_id=a11ba9bdcf2a54bbb2f01da7912a5a23",
+var a = $.ajax({url: "https://api.soundcloud.com/tracks/96883354.json?client_id=CLIENT_ID",
 				success: function(result){
 					console.log(result.stream_url)
 				}
@@ -37,7 +37,7 @@ audio = new Audio(),
 source,
 // `stream_url` you'd get from 
 // requesting http://api.soundcloud.com/tracks/6981096.json
-url = 'https://api.soundcloud.com/tracks/96883354/stream?client_id=a11ba9bdcf2a54bbb2f01da7912a5a23';
+url = 'https://api.soundcloud.com/tracks/96883354/stream?client_id=CLIENT_ID';
 // audio.autoplay = true;
 audio.src = url;
 audio.crossOrigin = "anonymous";
