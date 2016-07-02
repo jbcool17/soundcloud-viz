@@ -1,22 +1,48 @@
 
 
 AudioHandler = {
-	user: "jbcool17",
-	url:  "https://api.soundcloud.com/users/jbcool17/tracks?client_id=" + CLIENT_ID, 
-	soundcloud: function() {
+	initialize: function () {
 		SC.initialize({
 	    	client_id: CLIENT_ID,
 	    	client_secret: CLIENT_SECRET
 	  	});
-
-		var data = SC.get('/users/jbcool17/tracks').then(function(data) { console.log(data); });
-		return data;
+	},
+	user: "jbcool17",
+	url:  "https://api.soundcloud.com/users/jbcool17/tracks?client_id=" + CLIENT_ID,
+	createView: function (data) {
+		$('#list').append("<li>" + data + "</li>");
+		console.log("View Created")
+	}, 
+	soundcloud: function() {
+		SC.get('/users/jbcool17/tracks').then(function(data) { 
+			console.log(data[0]);
+			AudioHandler.createView(data[3].title) 
+		});
+	
+	},
+	testUser: function(){
+		SC.resolve("https://soundcloud.com/jbcool17").then(function(data) { 
+			console.log(data);
+			AudioHandler.createView(data.username) 
+		});
+	},
+	testTracks: function(){
+		SC.resolve("https://soundcloud.com/jbcool17/tracks").then(function(data) { 
+			console.log(data[0]);
+			AudioHandler.createView(data[0].title) 
+		});
 	}
+	
 }
 
 $(document).ready(function () {
 	
-	setTimeout(function (){ AudioHandler.soundcloud()}, 1000)	
+	setTimeout(function (){ 
+		AudioHandler.initialize();
+		console.log(AudioHandler.soundcloud());
+		console.log(AudioHandler.testUser());
+		console.log(AudioHandler.testTracks());
+	}, 2000)	
 	
 })
 
