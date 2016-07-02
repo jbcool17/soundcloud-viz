@@ -39,10 +39,10 @@ $(document).ready(function () {
 	
 	setTimeout(function (){ 
 		AudioHandler.initialize();
-		console.log(AudioHandler.soundcloud());
-		console.log(AudioHandler.testUser());
-		console.log(AudioHandler.testTracks());
-	}, 2000)	
+		AudioHandler.soundcloud();
+		AudioHandler.testUser();
+		AudioHandler.testTracks();
+	}, 1000)	
 	
 })
 
