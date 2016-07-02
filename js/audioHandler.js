@@ -49,9 +49,9 @@ AudioHandler = {
 			
 
 		audio.controls = true;
-		audio.loop = true;
+		audio.loop = false;
 		audio.autoplay = true;
-	 	// audio.crossOrigin = "anonymous";
+	 	audio.crossOrigin = "anonymous";
 
 	    $(audio).on('canplay', function() {
 	    	if(!playing){
