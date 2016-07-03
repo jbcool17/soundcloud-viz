@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/styles.css">
 	<script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
 	<script src="js/.env.js"></script>
+	<script src="js/stats.js"></script>
 </head>
 <body>
 	<h1>This is a page.</h1>
@@ -22,14 +23,14 @@
 		<div id="audio_box"></div>
 		<canvas id="analyser_render"></canvas>
 	</div>
-	<!-- <script src="js/OrbitControls.js"></script>
-	<script src="js/main.js"></script>
+	<!-- <script src="js/OrbitControls.js"></script> -->
+	<!-- <script src="js/main.js"></script> -->
 	
-	<script src="js/stats.js"></script>
+	
 	<script>
 		var stats = new Stats();
 		stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
-		document.body.appendChild( stats.dom );
+		statsView = document.body.appendChild( stats.dom );
 
 		function animate() {
 
@@ -45,7 +46,7 @@
 
 		requestAnimationFrame( animate );
 
-	</script> -->
+	</script>
 
 	<script src="js/audioHandler.js"></script>
 
