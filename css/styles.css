@@ -5,8 +5,28 @@
 	opacity: 0.8;
 	
 }*/
-div#mp3_player{ width:500px; height:60px; background:#fff; margin:50px auto; }
-div#mp3_player > div > audio{ padding:10px; width:500px; background:#efe; float:left;  }
-div#mp3_player > canvas{ padding:10px 10px 0px 10px; width:500px; height:300px; background:#002D3C; float:left; }
+#mp3_player{ 
+	width:500px; 
+	height:60px; 
+	background:#fff; 
+	margin:0px auto; 
+}
+#mp3_player > div > audio{ padding:10px; width:500px; background:#efe; float:left;  }
+#mp3_player > canvas{ padding:10px 10px 0px 10px; width:500px; height:300px; background:#002D3C; float:left; }
 
 div.stats { position: absolute; top:0; right: 0 }
+
+
+#list {
+	    width: 300px;
+	    padding: 5px;
+	    margin: 0px auto;
+	    border-radius: 10px;
+}
+
+#list li {
+	list-style: none;
+}
+#list li:hover {
+	background-color: tomato;
+}
