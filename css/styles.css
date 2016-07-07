@@ -5,6 +5,10 @@
 	opacity: 0.8;
 	
 }*/
+body {
+	font-family: sans-serif;
+}
+
 #mp3_player{ 
 	width:100%; 
 	height:60px; 
@@ -23,7 +27,7 @@ div.stats { position: absolute; top:0; right: 0 }
 
 
 #list {
-	    width: 300px;
+	    width: 350px;
 	    padding: 5px;
 	    margin: 0px auto;
 	    border-radius: 10px;
@@ -34,4 +38,8 @@ div.stats { position: absolute; top:0; right: 0 }
 }
 #list li:hover {
 	background-color: tomato;
+}
+
+.logo:hover {
+	border: 2px solid green;
 }

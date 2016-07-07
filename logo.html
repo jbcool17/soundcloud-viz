@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Testing</title>	
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/styles.css">
+	<script src="https://connect.soundcloud.com/sdk/sdk-3.1.2.js"></script>
+	<script src="js/.env.js"></script>
+	<script src="js/stats.js"></script>
+	<!-- <script src="js/three.min.js"></script> -->
+</head>
+<body>
+	<h1>This is a page.</h1>
+	<hr>
+	
+	<p id="loading">loading data...</p>
+
+	<ul id="list"></ul>	
+	
+	<hr>
+	
+	<div id="webgl-canvas"></div>
+	
+	<h2>Audio Viz...</h2>
+	<div id="mp3_player">
+		<div id="audio_box"></div>
+		<canvas id="analyser_render"></canvas>
+	</div>
+	<!-- <script src="js/OrbitControls.js"></script> -->
+	<!-- <script src="js/main.js"></script> -->
+	<div class="logo">
+		<img src="logo.gif" alt="">
+	</div>
+	
+	<script>
+		var stats = new Stats();
+		stats.showPanel( 1 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+		statsView = document.body.appendChild( stats.dom );
+
+		function animate() {
+
+		    stats.begin();
+
+		    // monitored code goes here
+
+		    stats.end();
+
+		    requestAnimationFrame( animate );
+
+		}
+
+		requestAnimationFrame( animate );
+
+	</script>
+
+	<!-- <script src="js/audioHandler.js"></script> -->
+
+</body>
+</html>
