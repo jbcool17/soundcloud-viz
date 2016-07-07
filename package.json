@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/jbcool17/soundcloud-viz#readme",
   "dependencies": {
-    "nprogress": "^0.2.0"
+    
   }
 }
