@@ -1,0 +1,45 @@
+/*AUDIO*/
+/*#mp3_player {
+	position: fixed;
+ 	bottom: 0px;
+	opacity: 0.8;
+	
+}*/
+body {
+	font-family: sans-serif;
+}
+
+#mp3_player{ 
+	width:100%; 
+	height:60px; 
+	background:#fff; 
+	margin:0px auto; 
+}
+#mp3_player > div > audio{ padding:10px; width:100%; background:#efe;  }
+#mp3_player > canvas{ 
+	padding:-1px 10px 0px 10px; 
+	width:100%; 
+	height:300px; 
+	/*background:#002D3C; */
+}
+
+div.stats { position: absolute; top:0; right: 0 }
+
+
+#list {
+	    width: 350px;
+	    padding: 5px;
+	    margin: 0px auto;
+	    border-radius: 10px;
+}
+
+#list li {
+	list-style: none;
+}
+#list li:hover {
+	background-color: tomato;
+}
+
+.logo:hover {
+	border: 2px solid green;
+}

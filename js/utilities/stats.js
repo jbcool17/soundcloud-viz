@@ -7,7 +7,7 @@ var Stats = function () {
 	var mode = 0;
 
 	var container = document.createElement( 'div' );
-	container.style.cssText = 'position:fixed;top:0;left:0;cursor:pointer;opacity:0.9;z-index:10000';
+	container.style.cssText = 'position:fixed;top:0;right:0;cursor:pointer;opacity:0.9;z-index:10000';
 	container.addEventListener( 'click', function ( event ) {
 
 		event.preventDefault();
@@ -28,7 +28,7 @@ var Stats = function () {
 
 		for ( var i = 0; i < container.children.length; i ++ ) {
 
-			container.children[ i ].style.display = i === id ? 'block' : 'none';
+			// container.children[ i ].style.display = i === id ? 'block' : 'none';
 
 		}
 

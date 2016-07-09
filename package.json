@@ -1,0 +1,22 @@
+{
+  "name": "soundcloud-viz",
+  "version": "1.0.0",
+  "description": "using soundcloud api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbcool17/soundcloud-viz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbcool17/soundcloud-viz/issues"
+  },
+  "homepage": "https://github.com/jbcool17/soundcloud-viz#readme",
+  "dependencies": {
+    
+  }
+}
