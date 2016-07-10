@@ -1,9 +1,7 @@
 # Exp SoundCloud Audio Viz
 
 - Uses soundcloud api
-- Workinprogress
+- Loads song into visualizer
 
 ## Tasks
-- get list of tracks
-- play a track
-- analyse audio data for viz
+- implement three js
