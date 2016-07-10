@@ -8,8 +8,8 @@ AudioHandler = {
 	  	});
 	  	console.log('(=>-Message: Sound Cloud Initialized!')
 	},
-	user: "jbcool17",
-	url:  "https://api.soundcloud.com/users/jbcool17/tracks?client_id=" + CLIENT_ID,
+	user: SC_USER,
+	url:  "https://api.soundcloud.com/users/"+ SC_USER +"/tracks?client_id=" + CLIENT_ID,
 	createTrackView: function (data) {
 		$('#loading').hide();
 		$('#list').append("<li><button id=" + 
@@ -21,7 +21,7 @@ AudioHandler = {
 
 	}, 
 	soundCloudTest: function() {
-		SC.get('/users/jbcool17/tracks').then(function(data) { 
+		SC.get('/users/'+ SC_USER + '/tracks').then(function(data) { 
 			console.log(data[3]);
 			AudioHandler.createTrackView(data[3]) 
 		});
@@ -131,8 +131,8 @@ $(document).ready(function () {
 	setTimeout(function (){ 
 		AudioHandler.initialize();
 		// AudioHandler.soundCloudTest();
-		// AudioHandler.getScUser("jbcool17");
-		AudioHandler.getScTracks("jbcool17");
+		// AudioHandler.getScUser(SC_USER);
+		AudioHandler.getScTracks(SC_USER);
 		
 	}, 1000)	
 	$('#list').hide();
