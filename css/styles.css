@@ -21,10 +21,11 @@ body {
 	background:#efe; 
 }
 
-/*#webgl canvas {
+#webgl canvas {
 	max-width: 960px;
+	max-height: 540px;
 }
-*/
+
 div.stats { position: absolute; top:0; right: 0 }
 
 #list {
