@@ -1,122 +1,90 @@
-//########################################################################
-//Start up your scene with a rotating cube
-//########################################################################
+var container, stats;
+var camera, scene, raycaster, renderer;
+var mouse = new THREE.Vector2(), INTERSECTED;
+var radius = 100, theta = 0;
 
-var scene, camera, renderer, light, spotLight, controls;
+init();
+animate();
 
-//########################################################################
-//SCENE
-//########################################################################
-scene = new THREE.Scene();
-
-//########################################################################
-//CAMERA
-//########################################################################
-camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.set( 0, 2, 5);
-
-// controls = new THREE.OrbitControls( camera );
-
-//########################################################################
-//LIGHTS
-//########################################################################
-light = new THREE.AmbientLight(0x000000);
-
-spotLight = new THREE.SpotLight( 0xffffff );
-spotLight.position.set( 100, 1000, 100 );
-	//shadows
-spotLight.castShadow = true;
-// spotLight.shadowDarkness = 0.5;
-spotLight.shadow.mapSize.width = 2048;
-spotLight.shadow.mapSize.height = 2048;
-spotLight.shadow.camera.near = 500;
-spotLight.shadow.camera.far = 4000;
-spotLight.shadow.camera.fov = 0.1; //shadow quality
-
-scene.add( light, spotLight );
-
-//########################################################################
-//RENDERER
-//########################################################################
-renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.setPixelRatio( window.devicePixelRatio );
-	//bg color
-renderer.setClearColor(0x21ccff, 1);
-	//for shadows
-renderer.shadowMap.enabled = true;
-renderer.shadowMap.type = THREE.PCFSoftShadowMap; //soft shadow
-	//add the scene
-document.body.insertBefore(renderer.domElement, document.body.firstChild);
-
-
-//########################################################################
-//OBJECTS
-//########################################################################
-	//Materials
-var boxMaterialBasic, boxMaterialLambert, boxMaterialPhong;
-	//Geo
-var boxGeometry, box;
-
-boxMaterialBasic = new THREE.MeshBasicMaterial({ color: 0xffffff, vertexColors: THREE.VertexColors });
-boxMaterialLambert = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
-boxMaterialPhong = new THREE.MeshPhongMaterial({ color: 0x2194ce, 
-												emissive: 0x2194ce, 
-												specular: 0x111111, 
-												shininess: 100,
-												shading: THREE.FlatShading  });
-
-boxGeometry = new THREE.BoxGeometry( 1, 1, 1);
-box = new THREE.Mesh( boxGeometry, boxMaterialLambert );
-box.position.set( 0, 2, 0);
-box.castShadow = true;
-box.receiveShadow = true;
-
-	//setup colors for Basic Material
-for (var i = 0; i <12; i+=2) {
-    var r= Math.random(); 
-    var g= Math.random()*100; 
-    var b= Math.random(); 
-                  
-    box.geometry.faces[i].color.setRGB(r,g,b);
-    box.geometry.faces[i+1].color.setRGB(r,g,b);                
+function init() {
+	// container = document.get( 'div' );
+	container = document.getElementById('webgl');
+	// document.body.appendChild( container );
+	var info = document.createElement( 'div' );
+	info.style.position = 'absolute';
+	info.style.top = '10px';
+	info.style.width = '100%';
+	info.style.textAlign = 'center';
+	info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> webgl - interactive cubes';
+	// container.appendChild( info );
+	camera = new THREE.PerspectiveCamera( 70, 960 / 540, 1, 10000 );
+	scene = new THREE.Scene();
+	var light = new THREE.DirectionalLight( 0xffffff, 1 );
+	light.position.set( 1, 1, 1 ).normalize();
+	scene.add( light );
+	var geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
+	for ( var i = 0; i < 2000; i ++ ) {
+		var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
+		object.position.x = Math.random() * 800 - 400;
+		object.position.y = Math.random() * 800 - 400;
+		object.position.z = Math.random() * 800 - 400;
+		object.rotation.x = Math.random() * 2 * Math.PI;
+		object.rotation.y = Math.random() * 2 * Math.PI;
+		object.rotation.z = Math.random() * 2 * Math.PI;
+		object.scale.x = Math.random() + 0.5;
+		object.scale.y = Math.random() + 0.5;
+		object.scale.z = Math.random() + 0.5;
+		scene.add( object );
+	}
+	raycaster = new THREE.Raycaster();
+	renderer = new THREE.WebGLRenderer();
+	renderer.setClearColor( 0xf0f0f0 );
+	renderer.setPixelRatio( window.devicePixelRatio );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.sortObjects = false;
+	container.appendChild(renderer.domElement);
+	// stats = new Stats();
+	// container.appendChild( stats.dom );
+	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+	//
+	window.addEventListener( 'resize', onWindowResize, false );
 }
-
-scene.add( box );
-
-var ground = new THREE.Mesh( new THREE.PlaneGeometry(100, 100, 1), new THREE.MeshPhongMaterial( { color: 0xffdd99 } ) );
-ground.rotateX( - Math.PI / 2 );
-ground.castShadow = false;
-ground.receiveShadow = true;
-
-scene.add( ground );
-
-//########################################################################
-//FUNCTIONS
-//########################################################################
-
-var onWindowResize = function(event) {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+function onWindowResize() {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( window.innerWidth, window.innerHeight );
 }
-
-var render = function () {
-	requestAnimationFrame( render );
-
-	//Animations
-	box.rotation.y += 0.01;
-	box.rotation.x += 0.01;
-
-	// controls.update();
+function onDocumentMouseMove( event ) {
+	event.preventDefault();
+	mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+	mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+//
+function animate() {
+	requestAnimationFrame( animate );
+	render();
+	stats.update();
+}
+function render() {
+	theta += 0.1;
+	camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+	camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
+	camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
+	camera.lookAt( scene.position );
+	camera.updateMatrixWorld();
+	// find intersections
+	raycaster.setFromCamera( mouse, camera );
+	var intersects = raycaster.intersectObjects( scene.children );
+	if ( intersects.length > 0 ) {
+		if ( INTERSECTED != intersects[ 0 ].object ) {
+			if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+			INTERSECTED = intersects[ 0 ].object;
+			INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+			INTERSECTED.material.emissive.setHex( 0xff0000 );
+		}
+	} else {
+		if ( INTERSECTED ) INTERSECTED.material.emissive.setHex( INTERSECTED.currentHex );
+		INTERSECTED = null;
+	}
 	renderer.render( scene, camera );
 }
-
-//ON PAGE LOAD
-$(document).ready(function() {
-
-	//starts scene
-	render();
-
-	window.addEventListener( 'resize', onWindowResize, false );
-});

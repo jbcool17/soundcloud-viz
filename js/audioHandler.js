@@ -50,6 +50,8 @@ AudioHandler = {
 			audio.src = track.stream_url + '?client_id=' + CLIENT_ID;
 			 
 		});
+
+		
 			
 		audio.controls = true;
 		audio.loop = false;
@@ -59,6 +61,7 @@ AudioHandler = {
 		var canvas, ctx, source, context, analyser, fbc_array, bars, bar_x, bar_width, bar_height;
 
 		function frameLooper(){
+			// $.getScript("js/main.js", function(){ console.log("(=>-Message: Loading script...") });
 		    window.requestAnimationFrame(frameLooper);
 		    fbc_array = new Uint8Array(analyser.frequencyBinCount);
 		    analyser.getByteFrequencyData(fbc_array);
@@ -67,6 +70,8 @@ AudioHandler = {
 		    // ctx.fillStyle = '#00CCFF'
 		    //'#'+Math.floor(Math.random()*16777215).toString(16);
 
+		    //-----------------------------------------------------------
+		    //Visualizer
 		    bars = 100;
 		    for (var i = 0; i < bars; i++) {
 		        bar_x = i * 3;
@@ -88,9 +93,17 @@ AudioHandler = {
 		        	ctx.fillStyle = '#'+Math.floor(Math.random()*16777215).toString(16);
 		        }
 
-		        
 		    }
-		    
+		    //-----------------------------------------------------------
+		    // Effects THREEJS
+		    scene.children.forEach(function(object){
+		    	if ( object.type === "Mesh"){
+		    		object.material.color.r = bh / 20
+		    		object.material.color.g = bh / 10
+		    		object.material.color.b = Math.random()
+		    	}
+		    })
+
 		}
 
 		function initMp3Player(){
@@ -109,6 +122,8 @@ AudioHandler = {
 		}
 
 		initMp3Player();
+
+		
 
 		console.log('(=>-Message: playing stream...')
 

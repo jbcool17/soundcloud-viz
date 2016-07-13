@@ -3,6 +3,6 @@ paceOptions = {
   document: true, 
   eventLag: true, 
   elements: {
-    selectors: ['body']
+    selectors: ['body', 'script', 'canvas', 'div']
   }
 };	
