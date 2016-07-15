@@ -101,6 +101,7 @@ AudioHandler = {
 		    		object.material.color.r = bh / 20
 		    		object.material.color.g = bh / 10
 		    		object.material.color.b = Math.random()
+		    		object.scale.x = bh / 10
 		    	}
 		    })
 

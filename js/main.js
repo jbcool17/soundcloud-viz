@@ -23,7 +23,7 @@ function init() {
 	light.position.set( 1, 1, 1 ).normalize();
 	scene.add( light );
 	var geometry = new THREE.BoxBufferGeometry( 20, 20, 20 );
-	for ( var i = 0; i < 2000; i ++ ) {
+	for ( var i = 0; i < 100; i ++ ) {
 		var object = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { color: Math.random() * 0xffffff } ) );
 		object.position.x = Math.random() * 800 - 400;
 		object.position.y = Math.random() * 800 - 400;
